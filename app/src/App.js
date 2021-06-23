@@ -1,23 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
+// import { Router, Route } from 'react-router-dom';
 
 import Layout from './components/Layout';
-import AddBookForm from './components/AddBookForm';
+// import AddBookForm from './components/AddBookForm';
+import Library from './components/Library';
 
 function App() {
   return (
     <Layout>
-      <StyledApp>
-        <AddBookForm />
-      </StyledApp>
+      {/* <AddBookForm /> */}
+      <Library />
     </Layout>
   );
 }
 
 export default App;
-
-const StyledApp = styled.div`
-  min-width: 500px;
-  max-width: 1000px;
-  margin: 0 auto;
-`;
