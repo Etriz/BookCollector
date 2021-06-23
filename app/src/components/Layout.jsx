@@ -1,13 +1,15 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, makeStyles, Container } from '@material-ui/core';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  makeStyles,
+  Container,
+  Link,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   title: {
     flexGrow: 1,
   },
@@ -20,10 +22,12 @@ const Layout = ({ children }) => {
       <AppBar position="static">
         <Container maxWidth="sm">
           <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              Home
-            </Typography>
-            <Button color="inherit">Login</Button>
+            <Link color="inherit" underline="none" href="/" className={classes.title}>
+              <Typography variant="h6">Home</Typography>
+            </Link>
+            <Button color="inherit" href="/add">
+              Add Book
+            </Button>
           </Toolbar>
         </Container>
       </AppBar>
