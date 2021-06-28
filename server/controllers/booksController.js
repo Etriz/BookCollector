@@ -25,8 +25,24 @@ const getAllBooks = async (req, res) => {
   });
 };
 
+const updateBook = async (req, res) => {
+  const body = req.body;
+  if (!body) return res.status(400).json({ success: false, error: 'No changes given' });
+
+  try {
+    let changeBook = await Book.findById(req.params.id);
+    changeBook.title = body?.title;
+    changeBook.author = body?.author;
+    changeBook.year = body?.year;
+    await changeBook.save();
+    return res.status(200).json({ success: true, message: 'Book Updated', data: changeBook });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err });
+  }
+};
+
 const deleteBook = async (req, res) => {
-  await Book.findOneAndDelete({}, (err, book) => {
+  await Book.findOneAndDelete({ _id: req.params.id }, (err, book) => {
     if (err) return res.status(400).json({ success: false, error: err });
     if (!book) return res.status(400).json({ success: false, error: 'Book not found' });
 
@@ -34,4 +50,4 @@ const deleteBook = async (req, res) => {
   });
 };
 
-module.exports = { createBook, getAllBooks, deleteBook };
+module.exports = { createBook, getAllBooks, updateBook, deleteBook };
