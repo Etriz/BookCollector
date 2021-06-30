@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import axios from 'axios';
+
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -22,24 +25,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const EMPTY_FORM = { title: '', author: '', year: '' };
+
 export default function AddBookForm() {
   const classes = useStyles();
+  const [formData, setFormData] = useState(EMPTY_FORM);
+  const history = useHistory();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      axios.post('https://rpd-books-mongodb.herokuapp.com/api/books', formData);
+      setFormData(EMPTY_FORM);
+      history.push('/');
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                name="firstName"
+                name="title"
                 variant="outlined"
                 required
                 fullWidth
                 id="title"
                 label="Title"
                 autoFocus
+                value={formData.title}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -50,10 +73,20 @@ export default function AddBookForm() {
                 fullWidth
                 id="author"
                 label="Author"
+                value={formData.author}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField name="year" variant="outlined" fullWidth id="year" label="Year" />
+              <TextField
+                name="year"
+                variant="outlined"
+                fullWidth
+                id="year"
+                label="Year"
+                value={formData.year}
+                onChange={handleChange}
+              />
             </Grid>
           </Grid>
           <Button

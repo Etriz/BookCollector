@@ -21,8 +21,9 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
   },
 }));
-const BookCard = ({ book }) => {
+const BookCard = ({ book, removeItem }) => {
   const classes = useStyles();
+
   return (
     <Card className={classes.card}>
       <CardContent className={classes.cardContent}>
@@ -33,7 +34,11 @@ const BookCard = ({ book }) => {
         <Typography>{book?.year}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="secondary" variant="outlined">
+        <Button
+          size="small"
+          color="secondary"
+          variant="outlined"
+          onClick={() => removeItem(book._id)}>
           Remove
         </Button>
       </CardActions>
