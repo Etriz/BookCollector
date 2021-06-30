@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
@@ -24,8 +25,17 @@ const BookCarousel = () => {
   const [books, setBooks] = useState(DEFAULTBOOKS);
   const classes = useStyles();
 
+  const asyncFetch = async () => {
+    try {
+      const books = await axios.get('http://localhost:8000/api/books');
+      setBooks(books.data.data);
+    } catch (error) {
+      setBooks(DEFAULTBOOKS);
+    }
+  };
+
   useEffect(() => {
-    setBooks(DEFAULTBOOKS);
+    asyncFetch();
   }, []);
 
   return (

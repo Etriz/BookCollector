@@ -1,0 +1,28 @@
+.glide {
+  max-width: 1000px;
+  margin: auto;
+}
+.glide__slide {
+  height: auto;
+}
+.glide__arrow {
+  color: black;
+  top: auto;
+  border: 1px solid lightgray;
+  transform: translateY(-25%);
+}
+.glide__arrow:hover {
+  border: 1px solid gray;
+}
+.glide__bullets {
+  bottom: -1rem;
+}
+.glide__bullet,
+.glide__bullet:hover {
+  border: 1px solid #5e5e5e;
+}
+.glide__bullet--active,
+.glide__bullet:focus {
+  border: 1px solid #5e5e5e;
+  background: #5e5e5e;
+}

@@ -9,10 +9,10 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() => ({
   card: {
     height: '100%',
-    width: '11.5rem',
     display: 'flex',
     flexDirection: 'column',
-    margin: 'auto 2px',
+    margin: 'auto .25rem',
+    border: '1px solid lightgray',
   },
   cardMedia: {
     paddingTop: '100px', // 16:9
