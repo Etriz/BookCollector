@@ -13,7 +13,7 @@ const DEFAULTBOOKS = [
   { title: 'Good Omens', author: 'Neil Gaiman' },
 ];
 
-const Glider = () => {
+const Glider = ({ isLoggedIn }) => {
   const [books, setBooks] = useState(DEFAULTBOOKS);
 
   const asyncFetch = async () => {
@@ -27,8 +27,10 @@ const Glider = () => {
   };
 
   useEffect(() => {
-    asyncFetch();
-  }, []);
+    isLoggedIn
+      ? asyncFetch()
+      : setBooks([{ title: 'No Books Added', author: 'Add some now!', hideButton: true }]);
+  }, [isLoggedIn]);
 
   const removeItem = async (id) => {
     try {
