@@ -11,8 +11,6 @@ const options = { perView: 2, bound: true, type: 'carousel' };
 const DEFAULTBOOKS = [
   { title: 'The Light Fantastic', author: 'Terry Pratchett' },
   { title: 'Good Omens', author: 'Neil Gaiman' },
-  { title: 'What A Long Strange Trip Its Been', author: 'The Grateful Dead', year: '1978' },
-  { title: 'Test Book', author: 'This Guy' },
 ];
 
 const Glider = () => {
@@ -23,8 +21,8 @@ const Glider = () => {
       const books = await axios.get('https://rpd-books-mongodb.herokuapp.com/api/books');
       setBooks(books.data.data);
     } catch (error) {
-      console.error(error);
-      setBooks(DEFAULTBOOKS);
+      console.error(`ryan error`, error);
+      setBooks([{ title: 'No Books Added', author: 'Add some now!', hideButton: true }]);
     }
   };
 

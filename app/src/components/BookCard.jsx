@@ -34,13 +34,15 @@ const BookCard = ({ book, removeItem }) => {
         <Typography>{book?.year}</Typography>
       </CardContent>
       <CardActions>
-        <Button
-          size="small"
-          color="secondary"
-          variant="outlined"
-          onClick={() => removeItem(book._id)}>
-          Remove
-        </Button>
+        {!book?.hideButton ? (
+          <Button
+            size="small"
+            color="secondary"
+            variant="outlined"
+            onClick={() => removeItem(book._id)}>
+            Remove
+          </Button>
+        ) : null}
       </CardActions>
     </Card>
   );
